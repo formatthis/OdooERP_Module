@@ -1,0 +1,125 @@
+<odoo>
+    <!-- มุมมองฟอร์มสำหรับข้อมูลสุขภาพลูกค้า -->
+    <record id="view_customer_health_form" model="ir.ui.view">
+        <field name="name">customer.health.form</field>
+        <field name="model">customer.health</field>
+        <field name="arch" type="xml">
+            <form string="ข้อมูลผู้เข้าอบรม">
+                <sheet>
+                    <group>
+                        <group string="ข้อมูลลูกค้า">
+                            <field name="name" string="ชื่อ-นามสกุล" required="1"/>
+                            <field name="phone" string="เบอร์โทรศัพท์"/>
+                            <field name="email" string="อีเมล"/>
+                            <field name="address" string="ที่อยู่"/>
+                        </group>
+                        <group string="ข้อมูลบริษัท">
+                            <field name="company_id" string="บริษัท" required="1"/>
+                        </group>
+                    </group>
+                    <group string="ข้อมูลด้านสุขภาพ">
+                        <field name="chronic_diseases" string="โรคประจำตัว"/>
+                        <field name="food_allergies" string="อาหารที่แพ้"/>
+                        <field name="health_interests" string="ความสนใจด้านสุขภาพ"/>
+                    </group>
+                    <notebook>
+                        <!-- แท็บประวัติการอบรม -->
+                        <page string="ประวัติการอบรม">
+                            <field name="training_history_ids" domain="[('customer_id', '=', id)]">
+                                <tree string="ประวัติการอบรม" default_order="start_date desc">
+                                    <field name="course_id" string="ชื่อหลักสูตร"/>
+                                    <field name="start_date" string="วันที่เริ่ม"/>
+                                    <field name="end_date" string="วันที่สิ้นสุด"/>
+                                    <field name="evaluation_result" string="ผลประเมิน"/>
+                                </tree>
+                                <form string="การอบรม">
+                                    <group>
+                                        <field name="course_id" string="ชื่อหลักสูตร" required="1"/>
+                                        <field name="start_date" string="วันที่เริ่ม" required="1"/>
+                                        <field name="end_date" string="วันที่สิ้นสุด" required="1"/>
+                                        <field name="evaluation_result" string="ผลประเมิน"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <!-- แท็บองค์ประกอบของร่างกาย -->
+                        <page string="องค์ประกอบของร่างกาย">
+                            <group>
+                                <field name="fat_mass_percent" string="เปอร์เซ็นต์ไขมัน"/>
+                                <field name="muscle_mass" string="มวลกล้ามเนื้อ"/>
+                                <field name="body_water" string="น้ำในร่างกาย"/>
+                                <field name="bone_mass" string="มวลกระดูก"/>
+                            </group>
+                        </page>
+                        
+                        <!-- แท็บการวัดค่าทางร่างกาย -->
+                        <page string="การวัดค่าทางร่างกาย">
+                            <group>
+                                <field name="vital_capacity" string="ความจุปอด"/>
+                                <field name="grip_strength" string="แรงบีบมือ"/>
+                                <field name="flexibility" string="ความยืดหยุ่น"/>
+                                <field name="sit_and_stand" string="ทดสอบนั่ง-ลุก"/>
+                            </group>
+                        </page>
+
+                        <!-- แท็บการวัดค่าทางเมตาบอลิก -->
+                        <page string="การวัดค่าทางเมตาบอลิก">
+                            <group>
+                                <field name="bmr" string="อัตราการเผาผลาญพื้นฐาน"/>
+                                <field name="bmi" string="ดัชนีมวลกาย (BMI)"/>
+                                <field name="bmi_category" string="หมวดหมู่ BMI"/>
+                            </group>
+                        </page>
+                        
+                        <!-- แท็บการวิเคราะห์โดยรวม -->
+                        <page string="การวิเคราะห์โดยรวม">
+                            <group>
+                                <field name="body_analysis_score" string="คะแนนวิเคราะห์ร่างกาย"/>
+                                <field name="analysis_date" string="วันที่วิเคราะห์"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- มุมมองรายการสำหรับข้อมูลสุขภาพลูกค้า -->
+    <record id="view_customer_health_tree" model="ir.ui.view">
+        <field name="name">customer.health.tree</field>
+        <field name="model">customer.health</field>
+        <field name="arch" type="xml">
+            <tree string="ข้อมูลผู้เข้าอบรม">
+                <field name="name" string="ชื่อ-นามสกุล"/>
+                <field name="phone" string="เบอร์โทรศัพท์"/>
+                <field name="email" string="อีเมล"/>
+                <field name="company_id" string="บริษัท"/>
+                <field name="chronic_diseases" string="โรคประจำตัว"/>
+                <field name="food_allergies" string="อาหารที่แพ้"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- การกระทำเพื่อเปิดฟอร์มข้อมูลสุขภาพลูกค้า -->
+    <record id="action_customer_health" model="ir.actions.act_window">
+        <field name="name">ข้อมูลผู้เข้าอบรม</field>
+        <field name="res_model">customer.health</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                สร้างและจัดการข้อมูลผู้เข้าอบรม
+            </p>
+        </field>
+    </record>
+
+    <!-- เมนูหลัก -->
+    <menuitem id="menu_customer_health_root" name="ข้อมูลผู้เข้าอบรม" sequence="10"/>
+
+    <!-- เมนูย่อยสำหรับข้อมูลสุขภาพลูกค้า -->
+    <menuitem id="menu_customer_health_data"
+              name="ข้อมูลผู้เข้าอบรม"
+              parent="menu_customer_health_root"
+              action="action_customer_health"
+              sequence="10"/>
+</odoo>

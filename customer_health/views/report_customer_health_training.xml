@@ -1,0 +1,25 @@
+<odoo>
+    <record id="action_report_customer_health" model="ir.actions.report">
+        <field name="name">Customer Health Report</field>
+        <field name="model">customer.health</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_health.report_customer_health_training_card</field>
+        <field name="report_file">customer_health.report_customer_health_training_card</field>
+        <field name="print_report_name">'Customer Health Report - %s' % (object.name)</field>
+    </record>
+
+    <!-- Template สำหรับรายงาน -->
+    <template id="report_customer_health_training_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Customer Health Training Report</h2>
+                    <p><strong>Name:</strong> <t t-esc="doc.name"/></p>
+                    <p><strong>Course:</strong> <t t-esc="doc.course_name"/></p>
+                    <p><strong>Date:</strong> <t t-esc="doc.date"/></p>
+                    <p><strong>Evaluation Result:</strong> <t t-esc="doc.evaluation_result"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

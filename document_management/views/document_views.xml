@@ -1,0 +1,49 @@
+<odoo>
+    <!-- กำหนด Tree View -->
+    <record id="view_document_tree" model="ir.ui.view">
+        <field name="name">document.management.tree</field>
+        <field name="model">document.management</field>
+        <field name="arch" type="xml">
+            <tree string="Documents">
+                <field name="name"/>
+                <field name="version"/>
+                <field name="customer_id"/>
+                <field name="created_by"/>
+                <field name="last_updated_by"/>
+                <field name="last_updated_on"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- กำหนด Form View -->
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">document.management.form</field>
+        <field name="model">document.management</field>
+        <field name="arch" type="xml">
+            <form string="Document">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="version"/>
+                        <field name="document_file"/>
+                        <field name="customer_id"/>
+                        <field name="created_by" readonly="1"/>
+                        <field name="last_updated_by" readonly="1"/>
+                        <field name="last_updated_on" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- กำหนด Action ก่อน -->
+    <record id="action_document_management" model="ir.actions.act_window">
+        <field name="name">การจัดการเอกสาร</field>
+        <field name="res_model">document.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- กำหนด Menuitem ที่อ้างอิง Action -->
+    <menuitem id="menu_document_root" name="การจัดการเอกสาร"/>
+    <menuitem id="menu_document_management" name="การจัดการเอกสาร" parent="menu_document_root" action="document_management.action_document_management"/>
+</odoo>

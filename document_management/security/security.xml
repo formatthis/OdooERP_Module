@@ -1,0 +1,12 @@
+<!-- document_management/security/security.xml -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- สร้างกลุ่มผู้จัดการเอกสาร -->
+        <record id="group_document_manager" model="res.groups">
+            <field name="name">Document Manager</field>
+            <field name="category_id" ref="base.module_category_other"/> <!-- ใช้หมวดหมู่ที่มีอยู่แล้ว -->
+        </record>
+    </data>
+</odoo>

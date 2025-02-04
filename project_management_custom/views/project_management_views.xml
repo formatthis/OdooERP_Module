@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_project_management_tree" model="ir.ui.view">
+        <field name="name">project.management.tree</field>
+        <field name="model">project.management</field>
+        <field name="arch" type="xml">
+            <tree string="Project Management">
+                <!-- แสดงชื่อหลักสูตร -->
+                <field name="course_id"/>
+                <!-- วันที่เริ่มต้น-สิ้นสุด -->
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <!-- ผลประเมิน -->
+                <field name="evaluation_result"/>
+                <!-- ต้นทุนโครงการ -->
+                <field name="cost" widget="monetary"/>
+                <!-- สถานะโครงการ -->
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_project_management_form" model="ir.ui.view">
+        <field name="name">project.management.form</field>
+        <field name="model">project.management</field>
+        <field name="arch" type="xml">
+            <form string="Project Management">
+                <sheet>
+                    <!-- ส่วนบน: ข้อมูลหลัก -->
+                    <group>
+                        <group>
+                            <field name="course_id" required="1"/>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done,cancel"/>
+                            <field name="cost" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+
+                    <!-- รายละเอียดโครงการ -->
+                    <group>
+                        <field name="detail" widget="text"/>
+                    </group>
+
+                    <!-- ส่วนผลประเมิน -->
+                    <group>
+                        <field name="evaluation_result" widget="text"/>
+                    </group>
+
+                    <!-- ส่วนวิทยากรและเอกสาร -->
+                    <notebook>
+                        <page string="วิทยากร">
+                            <field name="instructor_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="เอกสารแนบ">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+
+                    <!-- พนักงานที่เกี่ยวข้องในโครงการ -->
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_project_management" model="ir.actions.act_window">
+        <field name="name">Project Management</field>
+        <field name="res_model">project.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_project_management_root"
+              name="การจัดการโครงการ"
+              sequence="10"/>
+
+    <menuitem id="menu_project_management"
+              name="การจัดการโครงการ"
+              parent="menu_project_management_root"
+              action="action_project_management"
+              sequence="10"/>
+</odoo>

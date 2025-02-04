@@ -1,0 +1,19 @@
+<!-- customer_health/views/customer_health_menu.xml -->
+<odoo>
+    <!-- แอคชันสำหรับเปิดฟอร์ม Customer Health -->
+    <record id="action_customer_health" model="ir.actions.act_window">
+        <field name="name">Customer Health Data</field>
+        <field name="res_model">customer.health</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- เมนูหลัก -->
+    <menuitem id="menu_customer_health_root" name="Customer Health" sequence="10"/>
+
+    <!-- เมนูย่อยสำหรับฟอร์ม Customer Health -->
+    <menuitem id="menu_customer_health_data"
+              name="Customer Health Data"
+              parent="menu_customer_health_root"
+              action="action_customer_health"
+              sequence="10"/>
+</odoo>

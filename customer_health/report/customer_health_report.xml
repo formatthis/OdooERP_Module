@@ -1,0 +1,113 @@
+<odoo>
+    <!-- กำหนดเทมเพลตสำหรับรายงาน -->
+    <template id="report_customer_health">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>รายงานข้อมูลสุขภาพลูกค้า</h2>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ชื่อ-นามสกุล</th>
+                        <td><t t-esc="doc.name"/></td>
+                        <th>อายุ</th>
+                        <td><t t-esc="doc.age"/></td>
+                    </tr>
+                    <tr>
+                        <th>ส่วนสูง</th>
+                        <td><t t-esc="doc.height_cm"/> ซม.</td>
+                        <th>น้ำหนัก</th>
+                        <td><t t-esc="doc.weight_kg"/> กก.</td>
+                    </tr>
+                    <tr>
+                        <th>ความดันโลหิต (BP)</th>
+                        <td><t t-esc="doc.blood_pressure"/></td>
+                        <th>ระดับน้ำตาลในเลือด (FBS)</th>
+                        <td><t t-esc="doc.fbs"/> มก./ดล.</td>
+                    </tr>
+                </table>
+                
+                <!-- ส่วนขององค์ประกอบร่างกาย -->
+                <h3>ข้อมูลองค์ประกอบร่างกาย</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>เปอร์เซ็นต์ไขมันในร่างกาย</th>
+                        <td><t t-esc="doc.fat_mass_percent"/> %</td>
+                    </tr>
+                    <tr>
+                        <th>มวลกล้ามเนื้อ</th>
+                        <td><t t-esc="doc.muscle_mass"/> กก.</td>
+                    </tr>
+                    <tr>
+                        <th>ปริมาณน้ำในร่างกาย</th>
+                        <td><t t-esc="doc.body_water"/> %</td>
+                    </tr>
+                    <tr>
+                        <th>มวลกระดูก</th>
+                        <td><t t-esc="doc.bone_mass"/> กก.</td>
+                    </tr>
+                </table>
+
+                <!-- ส่วนของการวัดสมรรถภาพ -->
+                <h3>การวัดสมรรถภาพร่างกาย</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ความจุปอด</th>
+                        <td><t t-esc="doc.vital_capacity"/></td>
+                    </tr>
+                    <tr>
+                        <th>แรงบีบมือ</th>
+                        <td><t t-esc="doc.grip_strength"/></td>
+                    </tr>
+                    <tr>
+                        <th>ความยืดหยุ่น</th>
+                        <td><t t-esc="doc.flexibility"/></td>
+                    </tr>
+                    <tr>
+                        <th>ทดสอบการนั่ง-ลุก</th>
+                        <td><t t-esc="doc.sit_and_stand"/></td>
+                    </tr>
+                </table>
+
+                <!-- ส่วนของข้อมูลการเผาผลาญ -->
+                <h3>ข้อมูลการเผาผลาญ</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>อัตราการเผาผลาญพื้นฐาน</th>
+                        <td><t t-esc="doc.bmr"/> กิโลแคลอรี</td>
+                    </tr>
+                    <tr>
+                        <th>ดัชนีมวลกาย (BMI)</th>
+                        <td><t t-esc="doc.bmi"/></td>
+                    </tr>
+                    <tr>
+                        <th>หมวดหมู่ BMI</th>
+                        <td><t t-esc="doc.bmi_category"/></td>
+                    </tr>
+                </table>
+
+                <!-- ส่วนของการวิเคราะห์ร่างกาย -->
+                <h3>การวิเคราะห์ร่างกาย</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>คะแนนการวิเคราะห์</th>
+                        <td><t t-esc="doc.body_analysis_score"/></td>
+                    </tr>
+                    <tr>
+                        <th>วันที่วิเคราะห์</th>
+                        <td><t t-esc="doc.analysis_date"/></td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <!-- กำหนด Action ของรายงาน -->
+    <report 
+        id="customer_health_report_action" 
+        model="customer.health" 
+        string="รายงานข้อมูลสุขภาพลูกค้า" 
+        report_type="qweb-pdf" 
+        name="customer_health.report_customer_health"  
+        file="customer_health.report_customer_health" 
+        attachment_use="False"
+    />
+</odoo>
